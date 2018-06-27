@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+            <script>
+                $.ajax({
+                    url: 'testfile.json',
+                    dataType: 'text',
+                    success: function( response){
+                        debugger;
+                        var sections = response.split('{"content_rating"');
+                        sections.shift();
+                        sections = sections.map( item=> JSON.parse('{"content_rating"' + item));
+                        
+                        
+                    },
+                    error: function( ){
+                        debugger;
+                    }
+                })
+            </script>
+    </head>
+    <body>
+        
+    </body>
+</html>

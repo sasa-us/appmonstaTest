@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>appmonstaTest</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  
+</head>
+<body>
+    <div class="container">
+
+            <div class="row justify-content-center my-5">
+                    <div class="input-group col-6">
+                        <div class="input-group-append">
+                            <button id='AllInfoButton' class="btn btn-outline-primary">get all from testfile.json</button>
+                        </div>
+                    </div>
+            </div>
+        <div class="row justify-content-center my-5">
+            <div class="input-group col-6">
+                <input type="text" class="form-control">
+                <div class="input-group-append">
+                    <button id='apiInfoButton' class="btn btn-outline-primary">insert DB from API call</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center my-5">
+            <div class="input-group col-6">
+                <input type="text" class="form-control">
+                <div class="input-group-append">
+                    <button id='dbInfoButton' class="btn btn-outline-primary">get info from DB</button>
+                </div>
+            </div>
+        </div>
+        <div class=" row col-lg-9 col-sm-12 student-list-container">
+            <table class="table app-list">
+                <thead>
+                    <tr>
+                        <th>App Name</th>
+                        <th>ID</th>
+                        <th>Genre</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- hardcode for test -->
+                  
+               </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="singleApp.js"></script>
+    <script src="allApp.js"></script>
+</body>
+</html>
