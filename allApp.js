@@ -27,6 +27,9 @@ function getAllfromFile() {
             //change string to json obj still store into array
             sections = sections.map( item=> JSON.parse('{"content_rating"' + item));
             console.log('after json.parse', sections);
+
+
+            //if  app_type:"GAME"  need to insert    ??????????????????????????
             insertAlltoDB(sections);
             
         },
