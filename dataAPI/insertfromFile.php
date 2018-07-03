@@ -11,6 +11,10 @@ if(empty($_GET['genre'])) {
 	$output['errors'][] = 'No genre given.';
 };
 
+if(empty($_GET['publisher_id'])) {
+	$output['errors'][] = 'No publisher_id given.';
+};
+
 
 $jsonString = file_get_contents('data.json');
 //var_dump($jsonString);
@@ -23,11 +27,26 @@ $insertName = $data['app_name'];
 $insertID = $data['id'];
 $inserttype = $data['genre'];
 $insertPrice = $data['price'];
-$query = "INSERT INTO `test`(`app_name`, `id`, `genre`, `price`) VALUES ('$insertName', '$insertID', '$inserttype', '$insertPrice')";
+
+// $publisher_id = $data['publisher_id'];
+// $publisher_name = $data['publisher_name'];
+// $publisher_email = $_GET['publisher_email'];
+// $publisher_address = $_GET['publisher_address'];
+// $publisher_url = $_GET['publisher_url'];
+// $release_date = $_GET['release_date'];
+// $game_app_id = $_GET['game_app_id'];
+
+$query = "INSERT INTO 
+            `test`(`app_name`, `id`, `genre`, `price`) 
+          VALUES 
+            ('$insertName', '$insertID', '$inserttype', '$insertPrice')" ;
 
 $result = null;
+
 //send the query to the database, store the result of the query into $result
 $result = mysqli_query($conn, $query);
+
+
 
 if(empty($result)) {
     $output['error'][] = 'DB error';
@@ -45,4 +64,3 @@ if(empty($result)) {
 }
 
 //return back to server.php
-?>
