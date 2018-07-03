@@ -61,7 +61,7 @@ function insertIntoDB(APIresponse) {
         icon_url: APIresponse['icon_url'],
         video_urls: APIresponse['video_urls'],
         screenshot_urls: APIresponse['screenshot_urls'],
-        //whats_new: APIresponse['whats_new'],
+        whats_new: APIresponse['whats_new'],
     
         bundle_id: APIresponse['bundle_id'],
         
