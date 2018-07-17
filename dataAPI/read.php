@@ -1,4 +1,6 @@
 <?php
+session_start();
+//print_r($_SESSION['userID']);
 require_once('mysql_connect.php');
 
 $query = "SELECT * FROM `test` ";

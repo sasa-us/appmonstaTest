@@ -10,9 +10,17 @@ require_once('../mysql_connect.php');
     //print_r($_POST);
     $email = $_POST['email'];
     //print($email);
-    $password = sha1($_POST['password']);
-    
-    $query = "SELECT `id`, `username` 
+   // $password = sha1($_POST['password']);
+   $password = $_POST['password'];
+
+   $email = mysqli_real_escape_string($conn, $email);   
+   $password = mysqli_real_escape_string($conn, $password);
+   $hashFormat = "$2y$10$";
+   $salt = "whyyoulookatmypassword";
+   $hash_and_salt = $hashFormat . $salt;
+   $password = crypt($password, $hash_and_salt);
+
+    $query = "SELECT `email`, `password`, `id` 
               FROM `users` 
               WHERE `email`='{$email}' AND `password`='{$password}'";
     $result = null;
@@ -28,7 +36,7 @@ require_once('../mysql_connect.php');
             //print_r($userData);
             $output['user'] = $userData;
             $_SESSION['userID'] = $userData['id'];
-            $_SESSION['username'] = $userData['username'];
+           // $_SESSION['username'] = $userData['username'];
     
             $output['success'] = true;
             $_SESSION['valid'] = true;

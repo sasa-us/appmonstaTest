@@ -105,7 +105,8 @@ function insertIntoDB(APIresponse) {
 function getData() {
    // alert('db Info app ');
     //var url = "https://api.appmonsta.com/v1/stores/android/details/com.atomicadd.fotos.json?country=US" ;
-   var url = 'server.php';
+   //var url = 'server.php?action=readAll';
+    var url = 'server.php';
     $.ajax({
         url: url,
         method: 'get',

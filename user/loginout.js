@@ -3,7 +3,9 @@ function init() {
     $("#loginbutton").on('click', loginUser);
     $("#logoutbutton").on('click', logoutUser);
     showWelcome();
-    $('#registrationbutton').on('click', registerUser);
+    showfbookWelcome(userInfo);
+    $('#formButton').on('click', fillForm);
+    // $('#savebutton').on('click', saveMySelection);
 }
 
 function loginUser() {
@@ -25,6 +27,9 @@ function loginUser() {
 console.log(response.user);
             if(response.success) {
                 showWelcome(response.user);
+                $('#savebutton').on('click', function() {
+                    saveMySelection(response.user.id);
+                });
             } else {
                 showRegiterInfo(response.error);
             }
@@ -40,13 +45,19 @@ function showWelcome(userInfo) {
     console.log('show welcome userinfo is  ', userInfo);
     if(userInfo) {
         $('#loginSection').hide();
+        $('#dbInfoButton').show();
+
+        $("#savebutton").show();
         $('#logoutSection').show();
-        $('#registrationbutton').hide();
+        $('#formButton').hide();
         $('#loginUserName').text(userInfo.username);
     }else {
         $('#logoutSection').hide();
+        $('#dbInfoButton').hide();
+        $("#savebutton").hide();
+
         $('#loginSection').show();
-        $('#registrationbutton').hide();
+        $('#formButton').hide();
         $('#loginUserName').empty();
         
     }
@@ -71,7 +82,7 @@ function logoutUser() {
 function showRegiterInfo(registerErrorInfo){
     //alert(registerErrorInfo);
     $('.notifyRegister').text(registerErrorInfo);
-    $('#registrationbutton').show();
+    $('#formButton').show();
     // $('<a>', )
     // <a href='registration.php'>Registration</a>
     //<div id="logoutSection">
@@ -81,7 +92,90 @@ function showRegiterInfo(registerErrorInfo){
     
 }
 
-function registerUser() {
+function fillForm() {
     alert('hi');
-    //go to registrationform.php
+  
+    $("#form1").toggle();
+
+    $("#submit").on('click', function() {
+        alert('register');
+        var url = 'user/reginstration.php';
+
+        var username = $('#formusername').val();
+        var email = $('#formemail').val();
+        var password = $('#formpassword').val();
+        userdata = {
+            username: username,
+            email: email,
+            password: password
+        }
+    $.ajax({
+        url: url,
+        method: 'post',
+        dataType: 'json',
+        data: userdata,
+        success: function(response) {
+            console.log('registration page', response);
+         
+        },
+        error: function () {
+            console.log('server not response');    
+        }
+    });
+        
+
+
+    });
+    
+}//fillForm()
+
+function saveMySelection(userid) {
+    //alert('hi');
+    console.log(userid);
+    var url = 'user/saveitem.php';
+
+        
+        userdata = {
+            game_id: 'com.yoambulante.mrludo',
+            user_id: userid,
+            genre: 'Casual',
+            platform:  'android',
+            price_value: 'free'
+            
+        }          
+    $.ajax({
+        url: url,
+        method: 'post',
+        dataType: 'json',
+        data: userdata,
+        success: function(response) {
+            console.log('save item response', response);
+         
+        },
+        error: function () {
+            console.log('server not response');    
+        }
+    });
 }
+
+function showfbookWelcome(userInfo) {
+    console.log('facebook user welcome userinfo is  ', userInfo);
+    if(userInfo) {
+        $('#loginSection').hide();
+        $('#dbInfoButton').show();
+
+        $("#savebutton").show();
+        $('#logoutSection').show();
+        $('#formButton').hide();
+        $('#loginUserName').text(userInfo.name);
+    }else {
+        $('#logoutSection').hide();
+        $('#dbInfoButton').hide();
+        $("#savebutton").hide();
+
+        $('#loginSection').show();
+        $('#formButton').hide();
+        $('#loginUserName').empty();
+        
+    }
+}//end showWelcome

@@ -1,58 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>appmonstaTest</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+        crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-  
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+    <fb:login-button scope="public_profile,email, user_posts" onlogin="ewwFacebook();">
+    </fb:login-button>
+
+    <div id="fb-root"></div>
+
+    <div class="fb-share-button" data-href="https://www.mobilegamefinder.com//" data-layout="button" data-size="small"
+        data-mobile-iframe="true">
+        <a target="_blank" href="https://www.mobilegamefinder.com/"
+            class="fb-xfbml-parse-ignore">Share</a>
+    </div>
+
     <div class="container">
-            <div id="itemDisplay">
-                  <p>Welcome <span id='loginUserName'> </span></p>
+        <div id="itemDisplay">
+            <p>Welcome
+                <span id='loginUserName'> </span>
+            </p>
+        </div>
+
+        <div id="loginSection">
+            email:
+            <input type="text" id='email' placeholder='email'>
+            <br> password:
+            <input type="text" id='password' placeholder='password'>
+            <button id="loginbutton">login</button>
+        </div>
+
+        <button id="savebutton">save my game</button>
+
+        <div id="logoutSection">
+            <!-- Welcome <span id="userName"> xx</span> -->
+            <button id="logoutbutton">logout</button>
+        </div>
+
+        <button type="button" id="formButton">register Form!</button>
+
+        <form id="form1">
+            username:
+            <input id="formusername" type="text" name="username">
+            <br> email:
+            <input id="formemail" type="text" name="email">
+            <br> password:
+            <input id="formpassword" type="text" name="password">
+            <br>
+            <button type="button" id="submit">Submit</button>
+        </form>
+
+
+        <!-- end form -->
+
+
+
+
+
+        <!-- <div class="row justify-content-center my-5">
+            <div class="input-group col-6">
+                <div class="input-group-append">
+                    <button id='AllInfoButton' class="btn btn-outline-primary">get all from testfile.json</button>
+                </div>
             </div>
-              
-                <div id="loginSection">
-                    <input type="text" id='email' placeholder='email' value="sa">
-                    <input type="text" id='password' placeholder='password' value='sa'>
-                  <button id="loginbutton">login</button>
-                </div>
-                <div class='notifyRegister'>
-            
-                    </div>
-                <div id="logoutSection">
-                    <!-- Welcome <span id="userName"> xx</span> -->
-                    <button id="logoutbutton">logout</button>
-                </div>
-                <div>
-                     <button id="registrationbutton">register</button>
-                </div>
-               
-            
-
-
-
-            <div class="row justify-content-center my-5">
-                    <div class="input-group col-6">
-                        <div class="input-group-append">
-                            <button id='AllInfoButton' class="btn btn-outline-primary">get all from testfile.json</button>
-                        </div>
-                    </div>
-            </div>
-        <div class="row justify-content-center my-5">
+        </div> -->
+        <!-- <div class="row justify-content-center my-5">
             <div class="input-group col-6">
                 <input type="text" class="form-control">
                 <div class="input-group-append">
                     <button id='singleApiCallButton' class="btn btn-outline-primary">Single API call directly insert to DB</button>
                 </div>
             </div>
-        </div>
-       
-       <div class="row justify-content-center my-5">
+        </div> -->
+
+        <div class="row justify-content-center my-5">
             <div class="input-group col-6">
                 <input type="text" class="form-control">
                 <div class="input-group-append">
@@ -72,15 +103,62 @@
                 </thead>
                 <tbody>
                     <!-- hardcode for test -->
-                  
-               </tbody>
+
+                </tbody>
             </table>
         </div>
     </div>
+
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '664317253903398',
+                cookie: true,
+                xfbml: true,
+                version: 'v3.0'
+            });
+
+            FB.AppEvents.logPageView();
+
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function ewwFacebook() {
+            console.log('facebook login success', arguments);
+            //    FB.api('/me', {fields: 'last_name'}, function(response) {
+            FB.api('me/?fields=id,name,albums{photos{images},description}', function (response) {
+                console.log(response);
+                //var username = response.name;
+                showfbookWelcome(response);
+            });
+        }
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src =
+                'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0&appId=664317253903398&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 
     <script src="singleApp.js"></script>
     <script src="allApp.js"></script>
     <script src="./user/loginout.js"></script>
     <!-- <script src="./user/logout.js"></script> -->
 </body>
+
 </html>
