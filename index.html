@@ -38,6 +38,10 @@
             <br> password:
             <input type="text" id='password' placeholder='password'>
             <button id="loginbutton">login</button>
+
+            <p>Enter Email Address To Send Password Link</p>
+            <input type="text" name="email">
+            <input type="submit" name="submit_email">
         </div>
 
         <button id="savebutton">save my game</button>
@@ -138,9 +142,12 @@
             console.log('facebook login success', arguments);
             //    FB.api('/me', {fields: 'last_name'}, function(response) {
             FB.api('me/?fields=id,name,albums{photos{images},description}', function (response) {
-                console.log(response);
+                console.log('ewwFacebook() response is ', response);
                 //var username = response.name;
                 showfbookWelcome(response);
+                $('#savebutton').on('click', function() {
+                    saveMySelection(response.id);
+                });
             });
         }
 

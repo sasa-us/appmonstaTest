@@ -20,7 +20,7 @@ require_once('../mysql_connect.php');
    $hash_and_salt = $hashFormat . $salt;
    $password = crypt($password, $hash_and_salt);
 
-    $query = "SELECT `email`, `password`, `id` 
+    $query = "SELECT `email`, `password`, `id`, `username`
               FROM `users` 
               WHERE `email`='{$email}' AND `password`='{$password}'";
     $result = null;

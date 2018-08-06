@@ -8,7 +8,7 @@ if (mysqli_connect_errno()) {
 
 //print_r($_POST);//  [game_id] => com.nine54.ArmyHero   [user_id] => 3
 //print_r($_SESSION['userID']);
-$game_id = $_POST['game_id'];
+$game_id = $_POST['game_id'];       
 $user_id = $_POST['user_id'];
 $genre = $_POST['genre'];
 $platform = $_POST['platform'];
@@ -19,7 +19,7 @@ $query = "INSERT INTO
                 `user_game`(`user_id`, `game_id`, `wizard_answer_genre`, `wizard_answer_platform`, `wizard_answer_price_value`) 
            VALUES 
                 ('$user_id', '$game_id', '$genre', '$platform', '$price_value')
-           ON DUPLICATE KEY UPDATE `user_id`='$user_id', `game_id` = '$game_id'   
+        --    ON DUPLICATE KEY UPDATE `user_id`='$user_id', `game_id` = '$game_id'   
         ";
 checkInsert($conn, $query);
 

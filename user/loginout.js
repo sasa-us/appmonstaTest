@@ -122,21 +122,17 @@ function fillForm() {
             console.log('server not response');    
         }
     });
-        
-
-
     });
     
 }//fillForm()
 
 function saveMySelection(userid) {
-    //alert('hi');
-    console.log(userid);
+    alert('hi');
+    console.log('saveMySelection userid is ', userid);
     var url = 'user/saveitem.php';
 
-        
         userdata = {
-            game_id: 'com.yoambulante.mrludo',
+            game_id: 'com.nine54.ArmyHero',
             user_id: userid,
             genre: 'Casual',
             platform:  'android',
@@ -160,6 +156,7 @@ function saveMySelection(userid) {
 
 function showfbookWelcome(userInfo) {
     console.log('facebook user welcome userinfo is  ', userInfo);
+    //will get {id: "10106353438320505", name: "Daniel Kay S"}
     if(userInfo) {
         $('#loginSection').hide();
         $('#dbInfoButton').show();
