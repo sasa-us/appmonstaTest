@@ -2,11 +2,11 @@ $(document).ready(init);
 
 function init() {
     $('#dbInfoButton').click(getData);
-    $('#apiInfoButton').click(insertDBfromAPI);
+    $('#singleApiCallButton').click(insertDBfromAPI);
 }
 
 function insertDBfromAPI() {
- 
+// alert('hi');
     //var url = "https://api.appmonsta.com/v1/stores/android/details/com.atomicadd.fotos.json?country=US" ;
     var url = "https://api.appmonsta.com/v1/stores/android/details/us.koller.cameraroll.json?country=US";
     $.ajax({
@@ -38,14 +38,50 @@ function insertDBfromAPI() {
 function insertIntoDB(APIresponse) {
     console.log('in insert into DB response is', APIresponse);
     console.log(APIresponse.genre);
-   
+    console.log('translated_description', APIresponse['translated_description']);
+    console.log('game_app_id', APIresponse['id']);
+    //var url = 'server.php?action=insertAPI';
+    //to insert signle info use below url
     var url = 'server.php';
     var ajaxData = {
         action: 'insertAPI',
         app_name: APIresponse['app_name'],
+        all_rating: APIresponse['all_rating'],
+        all_rating_count: APIresponse['all_rating_count'],
         id: APIresponse.id,
         genre: APIresponse.genre,
-        price: APIresponse.price
+
+        // publisher_id: APIresponse['publisher_id'],
+        // publisher_name: APIresponse['publisher_name'],
+        // publisher_email: APIresponse['publisher_email'],
+        // publisher_address: APIresponse['publisher_address'],
+        // publisher_url: APIresponse['publisher_url'],
+        // release_date: APIresponse['release_date'],
+        // game_app_id: APIresponse['id'],
+        // description: APIresponse.description,
+        //translated_description: APIresponse['translated_description'],
+        // icon_url: APIresponse['icon_url'],
+        // video_urls: APIresponse['video_urls'],
+        // screenshot_urls: APIresponse['screenshot_urls'],
+        // whats_new: APIresponse['whats_new'],
+    
+        // bundle_id: APIresponse['bundle_id'],
+        
+        price: APIresponse.price,
+        // status: APIresponse.status,
+        // downloads: APIresponse.downloads,
+        // genres: APIresponse.genres,
+        // iap_price_range: APIresponse['iap_price_range'],
+        // permissions: APIresponse.permissions,
+        // price_currency: APIresponse['price_currency'],
+        // price_value: APIresponse['price_value'],
+        // related: APIresponse.related,
+        // more_from_developer: APIresponse['more_from_developer'],
+        // related_apps: APIresponse['related_apps'],
+        // requires_os: APIresponse['requires_os'],
+       
+        // store_url: APIresponse['store_url'],
+        // translated_description: APIresponse['translated_description']
     };
 
     $.ajax({
@@ -53,6 +89,7 @@ function insertIntoDB(APIresponse) {
         method: 'get',
         dataType: 'json',
         data: ajaxData,
+        //data: APIresponse,
         success: function(response) {
             console.log('AJAX CALL response is ', response);
             //console.log('name', response['app_name']);
@@ -68,7 +105,8 @@ function insertIntoDB(APIresponse) {
 function getData() {
    // alert('db Info app ');
     //var url = "https://api.appmonsta.com/v1/stores/android/details/com.atomicadd.fotos.json?country=US" ;
-   var url = 'server.php';
+   //var url = 'server.php?action=readAll';
+    var url = 'server.php';
     $.ajax({
         url: url,
         method: 'get',
