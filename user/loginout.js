@@ -4,7 +4,10 @@ function init() {
     $("#logoutbutton").on('click', logoutUser);
     showWelcome();
     showfbookWelcome(userInfo);
-    $('#formButton').on('click', fillForm);
+    // $('#formButton').on('click', fillForm);
+    $('#formButton').on('click', function() {
+        alert('fill form');
+    });
     // $('#savebutton').on('click', saveMySelection);
 }
 
@@ -83,6 +86,8 @@ function showRegiterInfo(registerErrorInfo){
     //alert(registerErrorInfo);
     $('.notifyRegister').text(registerErrorInfo);
     $('#formButton').show();
+    $('#formButton').on('click', fillForm);
+    
     // $('<a>', )
     // <a href='registration.php'>Registration</a>
     //<div id="logoutSection">
@@ -95,7 +100,7 @@ function showRegiterInfo(registerErrorInfo){
 function fillForm() {
     alert('hi');
   
-    $("#form1").toggle();
+    $("#form1").show();
 
     $("#submit").on('click', function() {
         alert('register');

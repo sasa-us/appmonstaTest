@@ -1,0 +1,14 @@
+{
+    "name": "dev/appmonsta-api-test",
+    "require-dev": {
+    },
+    "authors": [
+        {
+            "name": "sasa-us",
+            "email": "sasa-us@us.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "5.2.*"
+    }
+}
