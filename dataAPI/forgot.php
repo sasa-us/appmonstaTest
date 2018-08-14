@@ -1,8 +1,9 @@
 <?php
 require '../vendor/autoload.php';
 require './classes/Config.php';
+require('../vendor/phpmailer/PHPMailer/PHPMailerAutoload.php');
 require_once('../mysql_connect.php');
-
+require_once('../vendor/phpmailer/email_config.php');
 
 $conn =mysqli_connect("localhost", "root", "root", "testgame");
 
@@ -56,24 +57,36 @@ if(ifItIsMethod('POST')) {
                    //need install phpmailer5.2 other wise class PHP mailer not found
                 $mail = new PHPMailer();
                 //echo get_class($mail);
-
+                $mail->SMTPDebug = 0; 
                 //copy from php mailer github, NEED change value
                 $mail->isSMTP();                                      // Set mailer to use SMTP
-                $mail->Host = Config::SMTP_HOST;  // Specify main and backup SMTP servers
-                $mail->Username = Config::SMTP_USER;                 // SMTP username
-                $mail->Password = Config::SMTP_PASSWORD;                           // SMTP password
-                $mail->Port = Config::SMTP_PORT;  
-                $mail->SMTPSecure = 'tls';   
+                $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
+
+                $mail->Username = EMAIL_USER;                // SMTP username
+                $mail->Password = EMAIL_PASS; 
+                                           // SMTP password
+                $mail->SMTPSecure = 'tls'; 
+                $mail->Port = 587;  
+                $options = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
+                $mail->smtpConnect($options);
+
                 $mail->isHTML(true); 
                 $mail->CharSet = 'UTF-8';  //used to let other language work  
                 
                 //recipients  the registered user email will be receiver
-                $mail->setFrom('bb', 'sharry');
+               
+                //this addr will be automaticaaly (sent to) received info 
                 $mail->addAddress($email);//the submitted email add.
                 //so it will automatically sent sth to this email addr
 
-                $mail->Subject = 'test email';
+                $mail->Subject = 'change password confirmation';
                 $mail->Body = '<p>Please click link to reset password.
                 <a href="http://localhost:8000/scratchpad/appmonstaAPITest/dataAPI/reset.php?email='.$email.'&token='.$token.' ">http://localhost:8000/scratchpad/appmonstaAPITest/dataAPI/reset.php?email='.$email.'&token='.$token.'</a>
                 

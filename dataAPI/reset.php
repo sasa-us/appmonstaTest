@@ -4,12 +4,18 @@ require_once('../mysql_connect.php');
 // if(!isset($_GET['email']) && !isset($_GET['token'])) {
 //     redirect('index');
 // }
+$email = $_GET['email'];
+$token = $_GET['token'];
+
+// print_r($_GET['token']);
+// exit();
 $query = "SELECT `username`,  `email`, `token` 
             FROM `users` 
             WHERE `token`=?
             ";
-$email = 'sharryluh@gmail.com';
-$token = '7dc4b8a3d88d631c78835d9f7e1ae74756ccc7d19171c05b2443c16b70ef934316bef1275e4fcbe00ba46b2fb43ae3bfcd85';
+        
+// $email = 'sharryluh@gmail.com';
+// $token = '7dc4b8a3d88d631c78835d9f7e1ae74756ccc7d19171c05b2443c16b70ef934316bef1275e4fcbe00ba46b2fb43ae3bfcd85';
 if($stmt = mysqli_prepare($conn, $query)) {
     mysqli_stmt_bind_param($stmt, "s", $token);
     mysqli_stmt_execute($stmt);
