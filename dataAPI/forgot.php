@@ -21,7 +21,6 @@ function confirmQuery($result) {
 }
 
 function email_exists($email){
-
     global $conn;
     $query = "SELECT `email` FROM `users` WHERE `email` = '$email'";
     $result = mysqli_query($conn, $query);
@@ -33,7 +32,6 @@ function email_exists($email){
         return false;
     }
 }
-
 
 if(ifItIsMethod('POST')) {
     global $conn;
@@ -53,7 +51,7 @@ if(ifItIsMethod('POST')) {
                 mysqli_stmt_close($stmt);
 
 
-                 // config phpmailer  
+                 // config phpmailer  ============================================================
                    //check require is work for phpmailer. put below two line on top and comment all other php file. 
                    //need install phpmailer5.2 other wise class PHP mailer not found
                 $mail = new PHPMailer();
@@ -72,7 +70,8 @@ if(ifItIsMethod('POST')) {
                 
                 //recipients  the registered user email will be receiver
                 $mail->setFrom('bb', 'sharry');
-                $mail->addAddress($email);
+                $mail->addAddress($email);//the submitted email add.
+                //so it will automatically sent sth to this email addr
 
                 $mail->Subject = 'test email';
                 $mail->Body = '<p>Please click link to reset password.
